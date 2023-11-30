@@ -2,22 +2,13 @@ import re
 import string
 
 
-def _getNonWhitespaceChar(check_string, index, reverse=False, singleLine=False) -> str:
-    whitespaceChars = string.whitespace if singleLine is False else {' ', '\t'}
-    try:
-        if reverse:
-            return next(char for char in reversed(check_string[:index]) if char not in whitespaceChars)
-        else:
-            return next(char for char in check_string[index:] if char not in whitespaceChars)
-    except StopIteration:
-        return ""
+
 
 
 class JsonC:
     def __init__(self):
-        self._encodeCommentPattern = re.compile(r'(//.*?(\n|$))|(/\*.*?\*/)', re.DOTALL | re.MULTILINE)
-        self._decodeCommentPattern = re.compile(
-            r',?\s*"__comment_\d+_\d+":\s*{[^{}]*"__comment_content":\s*"([^"]*)"[^{}]*"__is_inline":\s*(true|false)[^{}]*}\s*(?=\s*[,}])(,?)')
+
+
         self._jsonCData = ""
 
     def _encodeComments(self, match) -> str:

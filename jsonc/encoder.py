@@ -1,6 +1,24 @@
+import string
+import re
+
+
+def _getNonWhitespaceChar(check_string, index, reverse=False, singleLine=False) -> str:
+    whitespaceChars = string.whitespace if singleLine is False else (' ', '\t')
+    try:
+        if reverse:
+            return next(char for char in reversed(check_string[:index]) if char not in whitespaceChars)
+        else:
+            return next(char for char in check_string[index:] if char not in whitespaceChars)
+    except StopIteration as e:
+        print('Stop iteration error', e)
+        return ""
+    except IndexError as e:
+        print('List index out of range: ', e)
+        return ""
 
 
 class _JsonCEncoder:
+
     def __init__(self):
         pass
 
