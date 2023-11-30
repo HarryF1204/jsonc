@@ -1,3 +1,8 @@
+"""This file is to be ignored"""
+
+
+
+
 import re
 import string
 
@@ -11,29 +16,7 @@ class JsonC:
 
         self._jsonCData = ""
 
-    def _encodeComments(self, match) -> str:
-        nextChar = _getNonWhitespaceChar(self._jsonCData, match.end())
-        prevChar = _getNonWhitespaceChar(self._jsonCData, match.start(), reverse=True)
-        prevSlChar = _getNonWhitespaceChar(self._jsonCData, match.start(), reverse=True, singleLine=True)
 
-        isInline = True if prevSlChar in {',', '"', ']', '}'} else False
-        isCommaBefore = True if prevChar != ',' else False
-        isCommaAfter = True if nextChar not in {',', ']', '}'} else False
-
-        commentId = f'{match.start()}_{match.end()}'
-        commentContent = match.group().replace('\n', '\\n')
-
-        finalString = ''.join([
-            f'{"," if isCommaBefore else ""}"__comment_{commentId}":',
-            '{"__comment_content": ',
-            f'"{commentContent}",',
-            '"__is_inline": ',
-            str(str(isInline).lower()),
-            '}',
-            f'{"," if isCommaAfter else ""}'
-        ])
-
-        return finalString
 
     @staticmethod
     def _decodeComments(match) -> str:
@@ -45,11 +28,7 @@ class JsonC:
 
         return commentContent
 
-    def JsonCToJson(self, jsonCData) -> str:
-        self._jsonCData = jsonCData.strip("''")
-        jsonData = self._encodeCommentPattern.sub(self._encodeComments, self._jsonCData)
-        print(jsonData)
-        return jsonData
+
 
     def JsonToJsonc(self, jsonCData):
         self._jsonCData = self._decodeCommentPattern.sub(self._decodeComments,
