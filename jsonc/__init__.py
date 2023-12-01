@@ -9,8 +9,8 @@ from ._encoder import _JsonCEncoder
 import json
 import os
 
-jsonCDecoder = _JsonCDecoder()
-jsonCEncoder = _JsonCEncoder()
+_jsonCDecoder = _JsonCDecoder()
+_jsonCEncoder = _JsonCEncoder()
 
 
 def dump(jsonData, filePath, ensure_ascii=True, indent=2):
@@ -25,7 +25,7 @@ def dump(jsonData, filePath, ensure_ascii=True, indent=2):
 
     if os.path.exists(filePath):
         with open(filePath, 'w') as file:
-            file.write(jsonCDecoder.JsonToJsonC(jsonData, tabwidth=indent))
+            file.write(_jsonCDecoder.JsonToJsonC(jsonData, tabwidth=indent))
     else:
         raise Exception(f"file not found")
 
@@ -37,16 +37,17 @@ def dumps(jsonData, ensure_ascii=False, tab_width=2):
     else:
         raise Exception(f"Incorrect data format handed to dumps, Type: {type(jsonData)}")
 
-    return jsonCDecoder.JsonToJsonC(jsonData, tabwidth=tab_width)
+    return _jsonCDecoder.JsonToJsonC(jsonData, tabwidth=tab_width)
 
 
 def load(filePath):
     """Load jsonc from a file to python dictionary"""
+
     if os.path.exists(filePath):
         with open(filePath, 'r') as file:
             jsonData = file.read()
 
-        sJsonData = jsonCEncoder.JsonCToJson(jsonData)
+        sJsonData = _jsonCEncoder.JsonCToJson(jsonData)
         return json.loads(sJsonData)
     else:
         pass
@@ -54,7 +55,7 @@ def load(filePath):
 
 def loads(jsonCData):
     """"""
-    sJsonData = jsonCEncoder.JsonCToJson(jsonCData)
+    sJsonData = _jsonCEncoder.JsonCToJson(jsonCData)
     return json.loads(sJsonData)
 
 

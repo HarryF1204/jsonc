@@ -18,6 +18,7 @@ class _JsonCDecoder:
             r'(?=\s*[,}])'  # Lookahead for optional whitespace and comma or closing curly brace
             r'(,?)'  # Optional comma (captured in a group)
         )
+        self._formatEmptyObjects = re.compile(r'{\s*}')
 
     def JsonToJsonC(self, jsonCData, tabwidth=2):
         def decodeComments(match) -> str:
@@ -114,4 +115,6 @@ class _JsonCDecoder:
             if char != '/' and char != "*":
                 finalString += char
 
-        return finalString.replace('\\n', '\n').replace('\n\n', '\n')
+        finalString = self._formatEmptyObjects.sub(finalString, '')
+        finalString = finalString.replace('\\n', '\n').replace('\n\n', '\n')
+        return finalString
