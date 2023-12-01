@@ -1,6 +1,6 @@
 import jsonc
 
-print(jsonc.__doc__)
+# print(jsonc.__doc__)
 
 
 Data = '''{
@@ -16,11 +16,10 @@ Data = '''{
    "test": "awdw" // test
 }'''
 
-# aaaa = jsonc.loads(Data)
-# data = jsonc.dumps(aaaa)
-# jsonc.dump(aaaa, 'test.json', ensure_ascii=True, indent=10)
+aaaa = jsonc.loads(Data)
+data = jsonc.dumps(aaaa)
+jsonc.dump(aaaa, 'test.json', ensure_ascii=True, indent=4)
 #
-
-print(jsonc.load('test.json'))
-
+#
+# print(jsonc.load('test.json'))
 

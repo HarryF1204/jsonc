@@ -47,6 +47,9 @@ class JsonCDecoder:
                 tab = '\n' + ' ' * curr_tabbing * tab_width
                 return data[j - 1:endIndex].replace('\\n', tab).replace('/*', tab + '/*') + '\n' + tab
 
+        def spaces(curr_tabbing, tab_width) -> str:
+            return ' ' * curr_tabbing * tab_width
+
         inSComment = False
         inMComment = False
         inComment = False
@@ -99,13 +102,13 @@ class JsonCDecoder:
                     if inArray is False:
                         if char == ',':
                             if getNonWhitespaceChar(jsonData, index + 3) != '/':
-                                char += '\n' + ' ' * tabWidth * tabbing
+                                char += '\n' + spaces(tabbing, tabWidth)
                     if char == '{':
                         tabbing += 1
-                        char += '\n' + ' ' * tabWidth * tabbing
+                        char += '\n' + spaces(tabbing, tabWidth)
                     elif char == '}':
                         tabbing -= 1
-                        char = '\n' + ' ' * tabWidth * tabbing + char
+                        char = '\n' + spaces(tabbing, tabWidth) + char
 
             prevChar = char
             if char != '/' and char != "*":
