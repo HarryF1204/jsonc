@@ -1,2 +1,3 @@
 .idea/
-.jsonc/__pycache__
+jsonc/__pycache__
+main.py
