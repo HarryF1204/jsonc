@@ -1,8 +1,8 @@
 import re
-from jsonc.textUtils import getNonWhitespaceChar
+from ._textUtils import getNonWhitespaceChar
 
 
-class JsonCEncoder:
+class _JsonCEncoder:
 
     def __init__(self):
         self._encodeCommentPattern = re.compile(

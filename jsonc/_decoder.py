@@ -1,8 +1,8 @@
 import re
-from jsonc.textUtils import getNonWhitespaceChar
+from ._textUtils import getNonWhitespaceChar
 
 
-class JsonCDecoder:
+class _JsonCDecoder:
     def __init__(self):
         self._jsonCData = ""
         self._decodeCommentPattern = re.compile(
@@ -59,7 +59,7 @@ class JsonCDecoder:
         finalString = ""
         prevChar = ""
         tabNextChar = False
-        jsonData = self._jsonCData.__repr__().strip("''").replace('   ', '')
+        jsonData = self._jsonCData.__repr__().strip("''")
 
         for index, char in enumerate(jsonData):
             if tabNextChar is True and getNonWhitespaceChar(jsonData, index) != '}':

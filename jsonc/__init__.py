@@ -4,13 +4,13 @@ __version__ = '0.0.0'
 __author__ = "HarryF1204"
 __all__ = ["dump", "dumps", "load", "loads"]
 
-from jsonc.decoder import JsonCDecoder
-from jsonc.encoder import JsonCEncoder
+from ._decoder import _JsonCDecoder
+from ._encoder import _JsonCEncoder
 import json
 import os
 
-jsonCDecoder = JsonCDecoder()
-jsonCEncoder = JsonCEncoder()
+jsonCDecoder = _JsonCDecoder()
+jsonCEncoder = _JsonCEncoder()
 
 
 def dump(jsonData, filePath, ensure_ascii=True, indent=2):
