@@ -4,7 +4,7 @@ print(jsonc.__doc__)
 
 
 Data = '''{
-    "name": "Harry漢",
+    "name": "Harry",
    // defines name
    "name2": "test",
    "data": {
@@ -16,8 +16,11 @@ Data = '''{
    "test": "awdw" // test
 }'''
 
-aaaa = jsonc.loads(Data)
-data = jsonc.dumps(aaaa)
+# aaaa = jsonc.loads(Data)
+# data = jsonc.dumps(aaaa)
+# jsonc.dump(aaaa, 'test.json', ensure_ascii=True, indent=10)
+#
+
+print(jsonc.load('test.json'))
 
 
-print(data)

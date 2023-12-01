@@ -1,6 +1,5 @@
 import re
 from jsonc.textUtils import getNonWhitespaceChar
-from jsonc.textUtils import py_encode_basestring_ascii
 
 
 class JsonCDecoder:

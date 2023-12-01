@@ -1,5 +1,4 @@
 import re
-
 from jsonc.textUtils import getNonWhitespaceChar
 
 
@@ -42,4 +41,3 @@ class JsonCEncoder:
         self._jsonCData = jsonCData.strip("''")
         jsonData = self._encodeCommentPattern.sub(encodeComments, self._jsonCData)
         return jsonData
-
