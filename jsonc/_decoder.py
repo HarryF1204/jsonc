@@ -18,7 +18,11 @@ class _JsonCDecoder:
             r'(?=\s*[,}])'  # Lookahead for optional whitespace and comma or closing curly brace
             r'(,?)'  # Optional comma (captured in a group)
         )
-        self._formatEmptyObjects = re.compile(r'{\s*}')
+        self._formatEmptyObjects = re.compile(
+            r'[^{}\s]*'      # Matches zero or more characters that are neither `{`, `}`, nor whitespace.
+            r'\{\s*\s*\}\s*' # Matches an open curly bracket followed by zero or more whitespace characters and a close curly bracket.
+            r'[^{}\s]*'      # Matches zero or more characters that are neither `{`, `}`, nor whitespace.
+        )
 
     def JsonToJsonC(self, jsonCData, tabwidth=2):
         def decodeComments(match) -> str:
@@ -33,6 +37,7 @@ class _JsonCDecoder:
         self._jsonCData = jsonCData
         self._jsonCData = self._decodeCommentPattern.sub(decodeComments,
                                                          jsonCData.replace('\n', '').replace('    ', ''))
+
         return self._jsonCBeautifier(tabwidth)
 
     def _jsonCBeautifier(self, tabWidth) -> str:
@@ -115,6 +120,7 @@ class _JsonCDecoder:
             if char != '/' and char != "*":
                 finalString += char
 
-        finalString = self._formatEmptyObjects.sub(finalString, '')
+        finalString = self._formatEmptyObjects.sub('', finalString)
         finalString = finalString.replace('\\n', '\n').replace('\n\n', '\n')
+
         return finalString

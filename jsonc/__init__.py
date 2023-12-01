@@ -1,6 +1,6 @@
 r"""JSONC DOCS GO BRRRRRR"""
 
-__version__ = '0.0.0'
+__version__ = '0.0.2'
 __author__ = "HarryF1204"
 __all__ = ["dump", "dumps", "load", "loads"]
 
@@ -37,6 +37,7 @@ def dumps(jsonData, ensure_ascii=False, tab_width=2):
     else:
         raise Exception(f"Incorrect data format handed to dumps, Type: {type(jsonData)}")
 
+    print(_jsonCDecoder.JsonToJsonC(jsonData, tabwidth=tab_width))
     return _jsonCDecoder.JsonToJsonC(jsonData, tabwidth=tab_width)
 
 
