@@ -37,7 +37,6 @@ def dumps(jsonData, ensure_ascii=False, tab_width=2):
     else:
         raise Exception(f"Incorrect data format handed to dumps, Type: {type(jsonData)}")
 
-    print(_jsonCDecoder.JsonToJsonC(jsonData, tabwidth=tab_width))
     return _jsonCDecoder.JsonToJsonC(jsonData, tabwidth=tab_width)
 
 
@@ -55,7 +54,7 @@ def load(filePath):
 
 
 def loads(jsonCData):
-    """"""
+    """Load JSONC string to python dictionary"""
     sJsonData = _jsonCEncoder.JsonCToJson(jsonCData)
     return json.loads(sJsonData)
 

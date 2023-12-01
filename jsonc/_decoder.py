@@ -19,9 +19,13 @@ class _JsonCDecoder:
             r'(,?)'  # Optional comma (captured in a group)
         )
         self._formatEmptyObjects = re.compile(
-            r'[^{}\s]*'      # Matches zero or more characters that are neither `{`, `}`, nor whitespace.
-            r'\{\s*\s*\}\s*' # Matches an open curly bracket followed by zero or more whitespace characters and a close curly bracket.
-            r'[^{}\s]*'      # Matches zero or more characters that are neither `{`, `}`, nor whitespace.
+            r'(?<=\{)'  # Possitive look behind for opening brace
+            r'\s*'      # Whitespace
+            r'(?=})'    # Positive look ahead for closing brace
+            r'|'        # OR
+            r'(?<=\[)'  # Positive look behind for opening bracket
+            r'\s*'      # Whitespace
+            r'(?=])'    # Positive look ahead for closing bracket
         )
 
     def JsonToJsonC(self, jsonCData, tabwidth=2):
