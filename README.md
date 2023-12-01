@@ -1,6 +1,5 @@
 # JSONC
 
-----
 
 ## Overview
 **JSONC** is a python module to encode and decode json comments. It allows you to work with JSON files that include
@@ -28,7 +27,8 @@ data = '''{
 }'''
 
 # loads(tring) allows you to parse a JSONC string
-# load is a similar function taking the same parameters that allows you to load JSONC from a file to a python dictionary
+# load is a similar function taking the same parameters that allows you to load JSONC from a file to a python
+# dictionary
 jsonData = jsonc.loads(data)
 print(jsonData)
 print(type(jsonData))
