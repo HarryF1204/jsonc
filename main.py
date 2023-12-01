@@ -3,8 +3,7 @@ import jsonc
 print(jsonc.__doc__)
 
 
-Data = '''{
-   "name": "Harry",
+Data = '''{"name": "Harry漢",
    // defines name
    "name2": "test",
    "data": {
