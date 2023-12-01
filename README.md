@@ -27,8 +27,8 @@ data = '''{
 }'''
 
 # loads(tring) allows you to parse a JSONC string
-# load is a similar function taking the same parameters that allows you to load JSONC from a file to a python
-# dictionary
+# load is a similar function taking the same parameters that allows you to load JSONC from a file
+# to a pythondictionary
 jsonData = jsonc.loads(data)
 print(jsonData)
 print(type(jsonData))
