@@ -2,6 +2,7 @@ import re
 from jsonc.textUtils import getNonWhitespaceChar
 from jsonc.textUtils import py_encode_basestring_ascii
 
+
 class JsonCDecoder:
     def __init__(self):
         self._jsonCData = ""
@@ -19,7 +20,7 @@ class JsonCDecoder:
             r'(,?)'  # Optional comma (captured in a group)
         )
 
-    def JsonToJsonC(self, jsonCData):
+    def JsonToJsonC(self, jsonCData, tabwidth=2):
         def decodeComments(match) -> str:
             commentContent = match.group(1)
             isInline = match.group(2)
@@ -28,11 +29,13 @@ class JsonCDecoder:
                 " " if isInline == 'true' else "\n") + commentContent.replace('\\n', '\n')
 
             return commentContent
-        self._jsonCData = jsonCData
-        self._jsonCData = self._decodeCommentPattern.sub(decodeComments, jsonCData.replace('\n', '').replace('    ', ''))
-        return self._jsonCBeautifier()
 
-    def _jsonCBeautifier(self) -> str:
+        self._jsonCData = jsonCData
+        self._jsonCData = self._decodeCommentPattern.sub(decodeComments,
+                                                         jsonCData.replace('\n', '').replace('    ', ''))
+        return self._jsonCBeautifier(tabwidth)
+
+    def _jsonCBeautifier(self, tabWidth) -> str:
         def parseMLComments(data, j, curr_tabbing, tab_width) -> str:
             endIndex = None
             prev_char = ""
@@ -51,7 +54,6 @@ class JsonCDecoder:
         inArray = False
         inStr = False
         tabbing = 0
-        tabWidth = 2
         finalString = ""
         prevChar = ""
         tabNextChar = False
@@ -111,4 +113,3 @@ class JsonCDecoder:
                 finalString += char
 
         return finalString.replace('\\n', '\n').replace('\n\n', '\n')
-

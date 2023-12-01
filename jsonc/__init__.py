@@ -18,14 +18,14 @@ def dump():
     pass
 
 
-def dumps(jsonData, ensure_ascii=False):
+def dumps(jsonData, ensure_ascii=False, tab_width=2):
     """Dump formatted JSON(C) code"""
     if type(jsonData) == dict:
         jsonData = json.dumps(jsonData, indent=0, ensure_ascii=ensure_ascii)
     else:
         raise Exception(f"Incorrect data format handed to dumps, Type: {type(jsonData)}")
 
-    return jsonCDecoder.JsonToJsonC(jsonData)
+    return jsonCDecoder.JsonToJsonC(jsonData, tabwidth=tab_width)
 
 
 def load():
