@@ -7,7 +7,7 @@ class _JsonCDecoder:
         self._jsonCData = ""
         self._decodeCommentPattern = re.compile(
             r',?\s*'  # Optional comma and optional whitespace
-            r'"__comment_\d+_\d+":\s*'  # "__comment_" followed by digits and colon, optional whitespace
+            r'"(?: __comment_\d+_\d+":\s*)?'  # "__comment_" followed by digits and colon, optional whitespace
             r'{[^{}]*'  # Opening curly brace and anything but curly braces inside
             r'"__comment_content":\s*'  # "__comment_content" and optional whitespace
             r'"([^"]*)"'  # Capturing group for content inside double quotes
