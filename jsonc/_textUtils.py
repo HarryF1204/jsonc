@@ -14,3 +14,15 @@ def getNonWhitespaceChar(check_string, index, reverse=False, singleLine=False) -
     except IndexError as e:
         print('List index out of range: ', e)
         return ""
+
+
+def getPrevBracket(check_string, index):
+    try:
+        return next(char for char in check_string[index:] if char not in ('[', '{'))
+
+    except StopIteration as e:
+        print('Stop iteration error', e)
+        return ""
+    except IndexError as e:
+        print('List index out of range: ', e)
+        return ""
